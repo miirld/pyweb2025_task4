@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package glossary;
+
+service GlossaryService {
+  rpc GetAllTerms (GetAllTermsRequest) returns (GetAllTermsResponse) {}
+  rpc GetTerm (GetTermRequest) returns (TermResponse) {}
+  rpc CreateTerm (CreateTermRequest) returns (TermResponse) {}
+  rpc UpdateTerm (UpdateTermRequest) returns (TermResponse) {}
+  rpc DeleteTerm (DeleteTermRequest) returns (TermResponse) {}
+}
+
+message GetAllTermsRequest {}
+
+message GetAllTermsResponse {
+  map<string, Term> terms = 1;
+}
+
+message GetTermRequest {
+  string title = 1;
+}
+
+message CreateTermRequest {
+  Term term = 1;
+}
+
+message UpdateTermRequest {
+  string title = 1;
+  optional string definition = 2;
+  optional string source_link = 3;
+}
+
+message DeleteTermRequest {
+  string title = 1;
+}
+
+message TermResponse {
+  Term term = 1;
+}
+
+message Term {
+  string title = 1;
+  string definition = 2;
+  optional string source_link = 3;
+}
